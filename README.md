@@ -1,12 +1,12 @@
 # WindowMap
 
-A fast window picker for macOS. Organize windows into contexts and workspaces, switch between them instantly with keyboard, mouse, or trackpad.
+A fast window picker for macOS. Organize windows into contexts (tabs) and workspaces (columns), switch between them quickly with keyboard, mouse, or trackpad.
 
 ![WindowMap picker](Docs/screenshot.png)
 
 ## Why
 
-You have 20+ windows open across multiple projects. Cmd+Tab cycles apps, not windows. Cmd+` cycles windows within an app but without context. Mission Control is a wall of thumbnails. WindowMap groups your windows by context and workspace — you see only what matters, and switch in a few keystrokes.
+You have 20+ windows open across multiple projects. Cmd+Tab cycles apps, not windows. Cmd+` cycles windows within an app but without context. Mission Control is a wall of thumbnails. WindowMap organizes your windows in contexts and workspaces that makes sense to you and let you switch in a few keystrokes.
 
 ## How it works
 
