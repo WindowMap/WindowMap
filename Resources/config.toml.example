@@ -1,0 +1,138 @@
+# WindowMap configuration
+# This file auto-reloads on save — no need to restart the app.
+# All values are required — the app will not start if any are missing.
+
+# Log level: debug, info, warn, error
+log_level = "debug"
+
+# Picker panel opacity (0.0 = transparent, 1.0 = opaque)
+panel_opacity = 0.90
+
+[picker]
+# Global hotkey to toggle the picker
+# Modifiers: opt, cmd, ctrl, shift
+# Keys: a-z, 0-9, space, return, tab, escape, delete, up, down, left, right
+#       / \ - = [ ] ; ' , . `  (or named: slash, backslash, minus, equal, comma, period, grave)
+# Comma-separated for multiple bindings
+trigger = "opt+space"
+
+# Quick-cycle hotkey — opens picker, auto-advances to next window, confirm on modifier release
+# Comma-separated for multiple bindings. Set to "" to disable
+quick_trigger = "opt+tab,opt+k,opt+/"
+
+# Trackpad gesture to open/dismiss the picker
+# Format: "{3|4}-finger-{up|down}". Set to "" to disable
+gesture = "3-finger-up"
+dismiss_gesture = "3-finger-down"
+
+# Show + buttons for creating new contexts, workspaces, and launching apps
+# Set to false for a minimal keyboard-only UI
+show_plus_buttons = true
+
+# Center picker on screen at show time, then lock left edge
+# Columns added during a session grow right from the locked position
+# When false, left edge starts at panel_x margin instead of centered
+centered = true
+
+# Horizontal margin as fraction of screen width (0.0–0.5)
+# The picker never extends into this margin on either side
+# 0.0 = full screen width available, 0.1 = 10% margin each side
+panel_x = 0.1
+
+# Column width as multiple of row height (bigger = wider columns)
+# Row height adapts to screen size automatically, so this works on any display
+# Try 4 for compact, 5 for default, 6 for spacious
+column_width = 5
+
+# Vertical position of the panel's top edge as fraction of screen height
+# 0.0 = top of screen, 0.5 = middle, 1.0 = bottom
+# Panel extends downward from this point, clamped to screen bounds
+panel_y = 0.5
+
+# Visible row range — panel height adjusts within these bounds
+# Scrollbar appears when a workspace has more windows than max_height_rows
+min_height_rows = 1
+max_height_rows = 20
+
+# Window and workspace ordering: true = most recently used first, false = insertion order
+# Note: mru_order = false is experimental — some features (quick mode auto-advance,
+# switcher cycling) depend on MRU ordering and may behave inconsistently when disabled
+mru_order = true
+
+# Behavior when the picker loses focus (clicking outside, switching apps)
+# "confirm" = focus the selected window then dismiss
+# "cancel"  = dismiss without focusing any window
+click_outside = "confirm"
+
+# Context tab switching behavior
+# "click" = click on a tab to switch context
+# "hover" = switch context when the mouse hovers over a tab
+tab_switch = "hover"
+
+# Delay in ms before switching context on hover (only when tab_switch = "hover")
+# 0 = instant, 100 = 100ms (default). Higher values = more sticky, less accidental switches
+tab_hover_delay = 100
+
+[actions]
+# Action keys — single letters that trigger actions on the focused item.
+# Modifiers select the target level automatically:
+#   plain letter   → acts on window
+#   shift + letter → acts on workspace
+#   cmd + letter   → acts on context
+#
+# Convenience shortcuts (no modifier needed):
+#   tab strip focused → plain letter acts on context
+#   empty workspace   → plain letter acts on workspace
+#
+# Comma-separated for multiple bindings: confirm = "return,space"
+rename  = "r"
+move    = "m"
+new     = "n"
+close   = "c"
+confirm = "return,space"
+cancel  = "escape"
+
+# Override the automatic modifier pattern for a specific target:
+#   close.workspace = "x"     → x closes workspace instead of shift+c
+#   new.context = "ctrl+n"    → ctrl+n creates context instead of cmd+n
+
+[navigation]
+# Direction keys for browsing windows, workspaces, tabs, and move targets
+# Comma-separated for multiple bindings (e.g. arrows + vim-style):
+#   up    = "up,i"
+#   down  = "down,k"
+#   left  = "left,j"
+#   right = "right,l"
+up    = "up,i"
+down  = "down,k"
+left  = "left,j"
+right = "right,l"
+
+[switcher]
+# Switcher — flat list of all windows sorted by most recently used
+# Quick mode only: cycle on trigger repeat, confirm on modifier release
+# Comma-separated for multiple bindings. Set to "" to disable
+trigger = "cmd+tab,cmd+dot"
+
+# Maximum number of rows visible before scrolling
+visible_rows = 8
+
+# Panel width as fraction of screen width (e.g. 0.22 = 22% of screen width)
+width = 0.22
+
+[launcher]
+# Directories to scan for .app bundles (comma-separated)
+paths = "/Applications,~/Applications,/System/Applications"
+
+[preview]
+# Max window captures held in memory per session (clears on dismiss)
+cache_limit = 50
+
+# Border around the window preview panel
+# Color is always your macOS accent color (System Settings → Appearance → Color)
+border = 2
+border_radius = 14
+border_curve = "continuous"
+# border: thickness in points (0 = no border)
+# border_radius: corner rounding in points (0 = sharp corners)
+# border_curve: "circular" (standard arc) or "continuous" (macOS squircle)

@@ -1,0 +1,6 @@
+.build/
+.swiftpm/
+.dev/
+.claude/
+windowmap.log
+.DS_Store

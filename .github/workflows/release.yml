@@ -1,0 +1,57 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release:
+    runs-on: macos-14
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build arm64
+        run: swift build -c release --product WindowMap --arch arm64
+
+      - name: Build x86_64
+        run: swift build -c release --product WindowMap --arch x86_64
+
+      - name: Package app bundle
+        run: |
+          APP=WindowMap.app
+          mkdir -p $APP/Contents/MacOS $APP/Contents/Resources
+          lipo -create \
+            .build/arm64-apple-macosx/release/WindowMap \
+            .build/x86_64-apple-macosx/release/WindowMap \
+            -output $APP/Contents/MacOS/WindowMap
+          cp Resources/Info.plist $APP/Contents/
+          cp Resources/config.toml.example $APP/Contents/Resources/
+          codesign --force --sign - $APP
+          tar -czf WindowMap.tar.gz $APP
+          SHA=$(shasum -a 256 WindowMap.tar.gz | awk '{print $1}')
+          echo "SHA256=$SHA" >> "$GITHUB_ENV"
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: WindowMap.tar.gz
+          generate_release_notes: false
+          body: |
+            ## Install
+
+            ```sh
+            brew tap WindowMap/windowmap
+            brew install --cask windowmap
+            ```
+
+            **sha256:** `${{ env.SHA256 }}`
+
+            ## Permissions
+
+            Grant in System Settings → Privacy & Security:
+            1. **Accessibility** → WindowMap.app (required — hotkeys)
+            2. **Screen Recording** → WindowMap.app (optional — window previews)
